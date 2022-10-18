@@ -2,7 +2,7 @@
 import openpyxl
 import math
 
-wb = openpyxl.load_workbook("HW2/student.xlsx")
+wb = openpyxl.load_workbook("student.xlsx")
 ws = wb['Sheet1']
 
 total = []
