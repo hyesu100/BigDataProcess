@@ -10,12 +10,10 @@ DayOfTheWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
 
 with open(input_file, "rt") as fp:
     for line in fp:
-		uber = line.strip().split(",")
-        uber_date = uber[1].split("/")
+        uber = list(line.strip().split(","))
+        uber_date = list(uber[1].split("/"))
         today = calendar.weekday(int(uber_date[2]), int(uber_date[0]), int(uber_date[1]))
-        today = DayOfTheWeek[today]
-		info = (uber[0], today)
-
+        today = uber_date[0] + DayOfTheWeek[today]
 
         if today not in trip:
             trip[today] = [int(uber[2]), int(uber[3])]
