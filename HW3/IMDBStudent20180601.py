@@ -8,7 +8,7 @@ genres = dict()
 with open(input_file, "rt") as fp:
     data = fp.readlines()
 
-for row in fp:
+    for row in fp:
         movie = row.split("::")
         genre = movie[2].split("|")
 
