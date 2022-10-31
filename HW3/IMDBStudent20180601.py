@@ -4,13 +4,13 @@ import sys
 input_file = sys.argv[1] 
 output_file = sys.argv[2]
 
+
 genres = dict()
 with open(input_file, "rt") as fp:
-    data = fp.readlines()
-
     for row in fp:
-        movie = row.split("::")
-        genre = movie[2].split("|")
+        movies = row.split("::")
+        movies_genre = list(movies[2].strip())
+        genre = list(movies_genre[2].split("|"))
 
         for g in genre:
             if g not in genres:
@@ -19,5 +19,5 @@ with open(input_file, "rt") as fp:
                 genres[g] += 1
 
 with open(output_file, "wt") as fp:
-    for key in genres.keys():
-        fp.write(key + " " + str(genres[key]) + "\n")
+    for key, value in genres.items():
+        fp.write(key + " " + str(value) + "\n")
