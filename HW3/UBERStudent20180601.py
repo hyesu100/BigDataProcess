@@ -17,7 +17,7 @@ with open(input_file, "rt") as fp:
     for line in fp:
         uber = line.split(",")
         uberDay = uber[1].split("/")
-        today = uberRegion + "," + DayOfTheWeek(date(int(uberDay[2]), int(uberDay[0]), int(uberDay[1])))
+        today = uber[0] + "," + DayOfTheWeek(date(int(uberDay[2]), int(uberDay[0]), int(uberDay[1])))
 
         if today not in dicOne:
             dicOne[today] = int(uber[2])
@@ -29,3 +29,4 @@ with open(input_file, "rt") as fp:
 with open(output_file, "wt") as fp:
     for key, value in dicOne.items():
         fp.write(key + " " + str(value[0]) + str(value[1]) + "\n")
+
