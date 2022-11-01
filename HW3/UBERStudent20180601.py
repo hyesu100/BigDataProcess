@@ -27,6 +27,6 @@ with open(input_file, "rt") as fp:
             dicTwo[today][1] += int(uber[3])
 
 with open(output_file, "wt") as fp:
-    for key, value in dicOne.items():
-        fp.write(key + " " + str(value[0]) + str(value[1]) + "\n")
+    for i in dicOne.items():
+        fp.write(i + " " + str(dicOne[i]) + "," + str(dicTwo[i]) + "\n")
 

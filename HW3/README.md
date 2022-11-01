@@ -1,3 +1,0 @@
-# BigDataProcess
-
-🫠
