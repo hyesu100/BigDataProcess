@@ -20,7 +20,7 @@ with open(input_file, "rt") as fp:
             trip[today] = [int(uber[2]), int(uber[3])]
         else:
             trip[today][0] += int(today[2])
-			trip[today][1] += int(today[3])
+            trip[today][1] += int(today[3])
 
 with open(output_file, "wt") as fp:
     for key, value in trip.items():
