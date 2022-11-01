@@ -18,7 +18,8 @@ with open(input_file, "rt") as fp:
         today = DayOfTheWeek(date(int(uberDate[2]), int(uberDate[0]), int(uberDate[1])))
 
         if today not in trip:
-            trip[today] = [int(uber[2]), int(uber[3])]
+            trip[today] = int(today[2]) 
+            trip[today] = int(today[3])
         else:
             trip[today][0] += int(today[2])
             trip[today][1] += int(today[3])
