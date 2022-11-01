@@ -7,7 +7,7 @@ output_file = sys.argv[2]
 genres = dict()
 with open(input_file, "rt") as fp:
     for row in fp:
-            rows = row.replace("\n","")
+            row = row.replace("\n","")
             movies = row.split("::")
             genre = movies[2].split("|")
 
