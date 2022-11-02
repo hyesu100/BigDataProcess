@@ -13,8 +13,8 @@ def DayOfTheWeek(date):
 dictOne = dict()
 dictTwo = dict()
 
-with open(input_file, "rt") as f:
-	for row in f:
+with open(input_file, "rt") as fp:
+	for row in fp:
 		uber = row.split(",")
 		uber[-1] = uber[-1].split("\n")[0]
 		uberDay = uber[1].split("/")
@@ -29,7 +29,7 @@ with open(input_file, "rt") as f:
 			dictOne[result] += int(uber[2])	
 			dictTwo[result] += int(uber[3])	
 
-with open(output_file, "wt") as f:
+with open(output_file, "wt") as fp:
 	for key in dictOne.keys():
-		f.write(key +" "+str(dictOne[key]) + "," + str(dictTwo[key]) + "\n")
+		fp.write(key +" "+str(dictOne[key]) + "," + str(dictTwo[key]) + "\n")
 
