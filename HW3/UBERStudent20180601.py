@@ -1,34 +1,37 @@
 #!/usr/bin/python3
 import sys
-import datetime
+from datetime import datetime, date
+
+from numpy import append
 
 input_file = sys.argv[1] 
 output_file = sys.argv[2]
 
-def DayOfTheWeek(t) : 
-    days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
-    month, day, year = map(int, t.split("/"))
-    a = days[datetime.date(year, month, day).weekday()]
-    return a
+def DayOfTheWeek(date):
+	week = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+	day = date.weekday()
+	return week[day]
 
-with open(input_file, "rt") as f, open(output_file, 'wt') as f2 : 
-    info_uber = []
-    data = f.read().split("\n")
-    for info in data :
-        Base_n, date, active, trips = info.split(",")
-        day = DayOfTheWeek(date)
-        info_uber.append([Base_n, day, int(active), int(trips)])
-    
-    count_info = {}
-    for k in info_uber : 
-        info = k[0], k[1]
-        try : 
-            count_info[info][0] += k[2]
-            count_info[info][1] += k[3]
-        except :
-            count_info[info] = [k[2], k[3]]
-            
-    for key, value in count_info.items() : 
-        Base_n, day = key
-        active, trips = value
-        f2.write(f'{Base_n},{day} {active},{trips}\n')
+Dict = dict()
+u = []
+d = []
+
+with open(input_file, "rt") as fp:
+    for row in fp:
+        uber = row.strip().split(",")
+        uber = u.append(uber)
+        uberDay = int(uber[1].split("/"))
+        uberDay = d.append(uberDay)
+        today = uber[0] + "," + DayOfTheWeek(date(uberDay[2], uberDay[0], uberDay[1]))
+
+        if today not in Dict:
+            Dict[today] = int(uber[2])
+            Dict[today] = int(uber[3])
+        else:
+            Dict[today][0] += int(uber[2])
+            Dict[today][1] += int(uber[3])
+
+with open(output_file, "wt") as fp:
+    for key, value in Dict.items():
+        fp.write(key + " " + str(value[0]) + "," + str(value[1]) + "\n")
+
