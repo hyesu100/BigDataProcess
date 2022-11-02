@@ -33,5 +33,5 @@ string = dictOne.keys()
 
 with open(output_file, "wt") as fp:
 	for key in dictOne.keys():
-		f.write(k +" "+str(dictOne[k]) + "," + str(dictTwo[k]) + "\n")
+		f.write(key +" "+str(dictOne[key]) + "," + str(dictTwo[key]) + "\n")
 
