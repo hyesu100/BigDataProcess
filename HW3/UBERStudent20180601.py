@@ -1,32 +1,34 @@
 #!/usr/bin/python3
 import sys
-from datetime import datetime, date
+import datetime
 
 input_file = sys.argv[1] 
 output_file = sys.argv[2]
 
-dicOne = dict()
-dicTwo = dict()
+def DayOfTheWeek(t) : 
+    days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+    month, day, year = map(int, t.split("/"))
+    a = days[datetime.date(year, month, day).weekday()]
+    return a
 
-def DayOfTheWeek(date):
-	days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-	day = date.weekday()
-	return (days[day])
-
-with open(input_file, "rt") as fp:
-    for line in fp:
-        uber = line.split(",")
-        uberDay = uber[1].split("/")
-        today = uber[0] + "," + DayOfTheWeek(date(int(uberDay[2]), int(uberDay[0]), int(uberDay[1])))
-
-        if today not in dicOne:
-            dicOne[today] = int(uber[2])
-            dicTwo[today] = int(uber[3])
-        else:
-            dicOne[today][0] += int(uber[2])
-            dicTwo[today][1] += int(uber[3])
-
-with open(output_file, "wt") as fp:
-    for i in dicOne.items():
-        fp.write(i + " " + str(dicOne[i]) + "," + str(dicTwo[i]) + "\n")
-
+with open(input_file, "rt") as f, open(output_file, 'wt') as f2 : 
+    info_uber = []
+    data = f.read().split("\n")
+    for info in data :
+        Base_n, date, active, trips = info.split(",")
+        day = DayOfTheWeek(date)
+        info_uber.append([Base_n, day, int(active), int(trips)])
+    
+    count_info = {}
+    for k in info_uber : 
+        info = k[0], k[1]
+        try : 
+            count_info[info][0] += k[2]
+            count_info[info][1] += k[3]
+        except :
+            count_info[info] = [k[2], k[3]]
+            
+    for key, value in count_info.items() : 
+        Base_n, day = key
+        active, trips = value
+        f2.write(f'{Base_n},{day} {active},{trips}\n')
