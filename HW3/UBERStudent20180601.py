@@ -29,9 +29,7 @@ with open(input_file, "rt") as f:
 			dictOne[result] += int(uber[2])	
 			dictTwo[result] += int(uber[3])	
 
-string = dictOne.keys()
-
-with open(output_file, "wt") as fp:
+with open(output_file, "wt") as f:
 	for key in dictOne.keys():
 		f.write(key +" "+str(dictOne[key]) + "," + str(dictTwo[key]) + "\n")
 
