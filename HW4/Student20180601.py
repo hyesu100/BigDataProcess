@@ -19,13 +19,6 @@ def createDataSet(dirname):
         matrix[i, :] = getVector(dirname + '/' + fileNameStr)
     return matrix, labels
 
-    for i in range(m): 
-        fileNameStr = trainingFileList[i]
-        answer = int(fileNameStr.split('_')[0])
-        labels.append(answer)
-        matrix[i, :] = getVector(dirname + '/' + fileNameStr)
-    return matrix, labels
-
 
 def classify0(inX, dataSet, labels, k): 
     dataSetSize = dataSet.shape[0]
@@ -51,3 +44,28 @@ def getVector(filename):
             for j in range(32):
                 vector[0, 32 * i + j] = int(line[j])
         return vector        
+
+
+trainingFileDirName = sys.argv[1]
+testFileDirName = sys.argv[2]
+
+testFileList = listdir(testFileDirName)
+length = len(testFileList)
+
+matrix, labels = createDataSet(trainingFileDirName)
+
+for k in range(1, 21): 
+    count = 0 
+    errorCount = 0 
+    
+    for i in range(length): 
+        answer = int(testFileList[i].split('_')[0])
+        testData = getVector(testFileDirName + '/' + testFileList[i])
+        classifiedResult = classify0(testData, matrix, labels, k)
+        
+        count += 1
+        if answer != classifiedResult :
+            errorCount += 1
+    
+    
+    print(int(errorCount / count * 100))
